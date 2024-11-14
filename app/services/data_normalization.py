@@ -18,10 +18,10 @@ def find_and_publish_danger_sentences(email):
 
     found, index = contains_keyword(sentences, "explos", startswith=True)
     if found:
-        sentences.insert(0, sentences.pop(index))
+        email['sentences'] = sentences.insert(0, sentences.pop(index))
         producer(email,'TOPIC_EXPLOS')
 
     found, index = contains_keyword(sentences, "hostage")
     if found:
-        sentences.insert(0, sentences.pop(index))
+        email['sentences'] = sentences.insert(0, sentences.pop(index))
         producer(email,'TOPIC_HOSTAGES')
