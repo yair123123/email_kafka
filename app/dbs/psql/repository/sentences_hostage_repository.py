@@ -8,7 +8,7 @@ from app.dbs.psql.Models import SentenceHostage
 from app.dbs.psql.database.config import session_factory
 
 
-def insert_many_sentences(sentences: List[SentenceHostage]):
+def insert_many_sentences_h(sentences: List[SentenceHostage]):
     return all(map(lambda x: isinstance(x, Success), map(lambda x: insert_sentence_hostage(x), sentences)))
 
 
