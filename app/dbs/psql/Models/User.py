@@ -14,7 +14,18 @@ class User(Base):
     location_id = Column(Integer, ForeignKey("locations.location_id"))
     device_id = Column(Integer, ForeignKey("devices_info.device_info_id"))
 
-    location = relationship("Location",back_populates="user")
-    device_info = relationship("DeviceInfo",back_populates="user")
-    sentences_hostage = relationship("SentenceHostage",back_populates="user")
-    sentences_explos = relationship("SentenceExplos",back_populates="user")
+    location = relationship("Location",back_populates="user",lazy="joined")
+    device_info = relationship("DeviceInfo",back_populates="user",lazy="joined")
+    sentences_hostage = relationship("SentenceHostage",back_populates="user",lazy="joined")
+    sentences_explos = relationship("SentenceExplos",back_populates="user",lazy="joined")
+    def to_dict(self):
+        return {
+            "user_id": self.user_id,
+            "email": self.email,
+            "username": self.username,
+            "ip_address": self.ip_address,
+            "created_at": self.created_at,
+            'location': self.location.to_dict(),
+            'device_info':self.device_info.to_dict(),
+            'sentences_hostage': [sentence.sentenc for sentence in self.sentences_hostage],
+            'sentences_explos': [sentence.sentence for sentence in self.sentences_explos]        }

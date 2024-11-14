@@ -13,3 +13,11 @@ class Location(Base):
     country = Column(String(100),nullable=False)
 
     user = relationship("User",back_populates="location")
+    def to_dict(self):
+        return {
+            "location_id": self.location_id,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "city": self.city,
+            "country": self.country
+        }

@@ -1,5 +1,5 @@
 from flask import Flask
-
+from app.dbs.psql import Models
 from app.api.controller import get_email
 
 app = Flask(__name__)

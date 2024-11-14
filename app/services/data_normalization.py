@@ -13,7 +13,7 @@ def contains_keyword(sentences: List[str], keyword: str, startswith: bool = Fals
     return False
 
 
-def normalization_and_publish(email):
+def find_and_publish_danger_sentences(email):
     produce_row_data(email)
     sentences = email['sentences']
     if contains_keyword(sentences, "explos", startswith=True):
