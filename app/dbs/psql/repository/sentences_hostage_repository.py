@@ -27,3 +27,6 @@ def insert_sentence_hostage(sentence: SentenceHostage) -> Result[SentenceHostage
 def get_sentence_hostage_by_id(id: int) -> Maybe[SentenceHostage]:
     with session_factory() as session:
         return Maybe.from_optional(session.get(SentenceHostage, id))
+def get_all_sentences_hostage():
+    with session_factory() as session:
+        return session.query(SentenceHostage).all()

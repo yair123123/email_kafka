@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 from flask import Flask
 from kafka import KafkaConsumer
 
-from app.dbs.psql.Models.SentenceHostage import SentenceHostage
-from app.dbs.psql.repository.sentences_hostage_repository import insert_sentence_hostage
 from app.services.save_to_db import save_to_db
 
 load_dotenv(verbose=True)
@@ -22,7 +20,7 @@ def consume_sentence_hostage():
 
     print('listing...')
     for message in consumer:
-        save_to_db(message.value,"H")
+        save_to_db(message.value, "H")
         print(f'received: {message.key} : {message.value}')
 
 

@@ -25,3 +25,6 @@ def insert_sentence_explos(sentence:SentenceExplos) -> Result[SentenceExplos,str
 def get_sentence_explos_by_id(id:int) -> Maybe[SentenceExplos]:
     with session_factory() as session:
         return Maybe.from_optional(session.get(SentenceExplos,id))
+def get_all_sentences_explos():
+    with session_factory() as session:
+        return session.query(SentenceExplos).all()
