@@ -14,7 +14,7 @@ def produce_hostages(value):
     producer.send(
         os.environ['TOPIC_HOSTAGES'],
         value=value,
-        key=value['id'].encode('utf-8')
+        key="a".encode('utf-8')
     )
 
 def produce_explosion(value):
@@ -25,7 +25,7 @@ def produce_explosion(value):
     producer.send(
         os.environ['TOPIC_EXPLOS'],
         value=value,
-        key=value['id'].encode('utf-8')
+        key="a".encode('utf-8')
     )
 
 def produce_row_data(value):
@@ -36,7 +36,10 @@ def produce_row_data(value):
     producer.send(
         os.environ['TOPIC_ROW_DATA'],
         value=value,
-        key=value['id'].encode('utf-8')
+        key=value['email'].encode('utf-8')
     )
+
+
+
 
 

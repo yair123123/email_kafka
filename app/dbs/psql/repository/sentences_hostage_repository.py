@@ -1,12 +1,18 @@
+from typing import List
+
 from returns.maybe import Maybe
 from returns.result import Failure, Success, Result
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.dbs.psql.Models import Sentence
+from app.dbs.psql.Models import SentenceHostage
 from app.dbs.psql.database.config import session_factory
 
 
-def insert_sentence(sentence:Sentence) -> Result[Sentence,str]:
+def insert_many_sentences(sentences: List[SentenceHostage]):
+    return all(map(lambda x: isinstance(x, Success), map(lambda x: insert_sentence_hostage(x), sentences)))
+
+
+def insert_sentence_hostage(sentence: SentenceHostage) -> Result[SentenceHostage, str]:
     with session_factory() as session:
         try:
             session.add(sentence)
@@ -17,6 +23,7 @@ def insert_sentence(sentence:Sentence) -> Result[Sentence,str]:
             session.rollback()
             return Failure(str(e))
 
-def get_sentence_by_id(id:int) -> Maybe[Sentence]:
+
+def get_sentence_hostage_by_id(id: int) -> Maybe[SentenceHostage]:
     with session_factory() as session:
-        return Maybe.from_optional(session.get(Sentence,id))
+        return Maybe.from_optional(session.get(SentenceHostage, id))
