@@ -1,6 +1,6 @@
 from flask import blueprints, request, jsonify
 
-from app.dbs.psql.repository.user_repository import get_user_by_email, get_user_by_id
+from app.dbs.psql.repository.user_repository import get_user_by_email
 from app.services.data_normalization import find_and_publish_danger_sentences
 from app.services.service_email import most_word
 
@@ -18,10 +18,10 @@ def get_emails():
 def user_by_email(email: str):
     return (
         get_user_by_email(email).map(lambda u: jsonify(u.to_dict()))
-        .value_or((jsonify({"Error": "User not found"})))
+        .value_or((jsonify({"Error": "User is not found"})))
     )
+
 
 @get_email.route('/most', methods=["GET"])
 def most_word_in_danger_sentence():
-    return jsonify(f"the most word is {most_word()}")
-
+    return jsonify(f"the most common word is '{most_word()[0]}' which appears {most_word()[1]} times")

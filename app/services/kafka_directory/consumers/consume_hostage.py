@@ -15,7 +15,7 @@ def consume_sentence_hostage():
         os.environ['TOPIC_HOSTAGES'],
         bootstrap_servers=os.environ['BOOTSTRAP_SERVER'],
         value_deserializer=lambda x: json.loads(x.decode('utf-8')),
-        # auto_offset_reset='earliest'
+        auto_offset_reset='earliest'
     )
 
     print('listing...')
